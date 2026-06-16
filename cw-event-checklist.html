@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Charity Week Event Planning Checklist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FFF6EC;
+    --bg-2:#FFEFD9;
+    --orange:#F2741A;
+    --orange-deep:#C2410C;
+    --orange-soft:#FCD9A8;
+    --ink:#2A1A0F;
+    --muted:#9A7553;
+    --green:#16A34A;
+    --green-soft:#DCFCE7;
+    --card:#FFFFFF;
+    --line:#F1D9BC;
+    --shadow:0 1px 2px rgba(120,60,10,.06), 0 8px 24px rgba(180,90,20,.07);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:"Inter",system-ui,sans-serif;
+    color:var(--ink);
+    background:var(--bg);
+    background-image:radial-gradient(circle at 100% 0%, var(--bg-2), transparent 45%),
+                     radial-gradient(circle at 0% 100%, var(--bg-2), transparent 40%);
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    background:linear-gradient(135deg, #F2741A 0%, #E8590C 55%, #C2410C 100%);
+    color:#fff;
+    padding:44px 20px 40px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero::after{
+    content:"";
+    position:absolute; inset:0;
+    background-image:repeating-linear-gradient(135deg, rgba(255,255,255,.05) 0 2px, transparent 2px 22px);
+    pointer-events:none;
+  }
+  .hero-inner{
+    max-width:1080px; margin:0 auto;
+    display:flex; align-items:center; gap:32px; flex-wrap:wrap;
+    position:relative; z-index:1;
+  }
+  .hero-text{flex:1 1 340px;}
+  .eyebrow{
+    font-family:"Fredoka",sans-serif; font-weight:600;
+    letter-spacing:.14em; text-transform:uppercase;
+    font-size:.74rem; color:#FFE3C2; margin:0 0 8px;
+  }
+  .hero h1{
+    font-family:"Fredoka",sans-serif; font-weight:700;
+    font-size:clamp(1.9rem,5vw,3.1rem); line-height:1.04;
+    margin:0 0 12px; letter-spacing:-.01em;
+  }
+  .hero p{margin:0; max-width:46ch; color:#FFEEDD; font-size:1.02rem;}
+
+  /* progress ring */
+  .ring-wrap{flex:0 0 auto; display:flex; flex-direction:column; align-items:center; gap:6px;}
+  .ring{position:relative; width:148px; height:148px;}
+  .ring svg{transform:rotate(-90deg);}
+  .ring-track{fill:none; stroke:rgba(255,255,255,.22); stroke-width:13;}
+  .ring-fill{fill:none; stroke:#fff; stroke-width:13; stroke-linecap:round;
+    transition:stroke-dashoffset .5s ease, stroke .5s ease;}
+  .ring-label{
+    position:absolute; inset:0; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; line-height:1;
+  }
+  .ring-pct{font-family:"Fredoka",sans-serif; font-weight:700; font-size:2.1rem;}
+  .ring-sub{font-size:.72rem; color:#FFE3C2; margin-top:3px;}
+
+  /* ---------- Toolbar ---------- */
+  .toolbar{
+    max-width:1080px; margin:0 auto; padding:18px 20px 0;
+    display:flex; gap:10px; flex-wrap:wrap; align-items:center;
+  }
+  .count-note{font-size:.86rem; color:var(--muted); margin-right:auto; font-weight:500;}
+  button.tool{
+    font-family:"Inter",sans-serif; font-weight:600; font-size:.84rem;
+    border:1.5px solid var(--orange-soft); background:var(--card); color:var(--orange-deep);
+    padding:8px 14px; border-radius:999px; cursor:pointer; transition:all .15s ease;
+  }
+  button.tool:hover{background:var(--orange); color:#fff; border-color:var(--orange);}
+  button.tool:focus-visible{outline:3px solid var(--orange); outline-offset:2px;}
+
+  /* ---------- Grid ---------- */
+  .grid{
+    max-width:1080px; margin:0 auto; padding:20px 20px 60px;
+    display:grid; gap:18px;
+    grid-template-columns:repeat(auto-fill, minmax(320px,1fr));
+    align-items:start;
+  }
+  .card{
+    background:var(--card); border:1px solid var(--line); border-radius:18px;
+    box-shadow:var(--shadow); overflow:hidden; display:flex; flex-direction:column;
+  }
+  .card-head{padding:16px 18px 12px;}
+  .card-title-row{display:flex; align-items:center; gap:10px;}
+  .num{
+    font-family:"Fredoka",sans-serif; font-weight:700; font-size:.8rem;
+    background:var(--orange-soft); color:var(--orange-deep);
+    width:26px; height:26px; border-radius:8px;
+    display:flex; align-items:center; justify-content:center; flex:0 0 auto;
+  }
+  .card h2{
+    font-family:"Fredoka",sans-serif; font-weight:600; font-size:1.12rem;
+    margin:0; flex:1;
+  }
+  .badge{font-size:.74rem; font-weight:600; color:var(--muted); white-space:nowrap;}
+  .bar{height:6px; border-radius:999px; background:var(--bg-2); margin-top:12px; overflow:hidden;}
+  .bar-fill{height:100%; width:0%; background:var(--orange); border-radius:999px;
+    transition:width .4s ease, background .4s ease;}
+
+  ul.items{list-style:none; margin:0; padding:6px 8px 12px;}
+  li.item{margin:0;}
+  label.check{
+    display:flex; gap:11px; align-items:flex-start;
+    padding:9px 10px; border-radius:11px; cursor:pointer;
+    transition:background .12s ease;
+  }
+  label.check:hover{background:var(--bg);}
+  label.check input{position:absolute; opacity:0; width:0; height:0;}
+  .box{
+    flex:0 0 auto; width:21px; height:21px; border-radius:6px; margin-top:1px;
+    border:2px solid var(--orange); background:#fff;
+    display:flex; align-items:center; justify-content:center;
+    transition:all .15s ease;
+  }
+  .box svg{width:13px; height:13px; opacity:0; transform:scale(.5); transition:all .15s ease; stroke:#fff;}
+  label.check input:focus-visible + .box{outline:3px solid var(--orange); outline-offset:2px;}
+  .txt{font-size:.95rem; transition:color .15s ease;}
+  .note{display:block; font-size:.8rem; color:var(--muted); margin-top:3px; line-height:1.4;}
+
+  /* checked state */
+  label.check.done .box{background:var(--green); border-color:var(--green);}
+  label.check.done .box svg{opacity:1; transform:scale(1);}
+  label.check.done .txt{color:var(--muted); text-decoration:line-through; text-decoration-color:var(--orange-soft);}
+
+  .card.complete .bar-fill{background:var(--green);}
+  .card.complete .num{background:var(--green-soft); color:var(--green);}
+
+  footer{max-width:1080px; margin:0 auto; padding:0 20px 50px; color:var(--muted); font-size:.82rem;}
+  footer .built{color:var(--orange-deep); font-weight:600;}
+
+  @media (prefers-reduced-motion: reduce){
+    *{transition:none !important; scroll-behavior:auto !important;}
+  }
+
+  /* ---------- Print ---------- */
+  @media print{
+    body{background:#fff;}
+    .hero{background:#fff !important; color:var(--ink); padding:0 0 14px; border-bottom:3px solid var(--orange);}
+    .hero::after, .ring-wrap, .toolbar{display:none;}
+    .hero h1{color:var(--orange-deep);} .hero p, .eyebrow{color:var(--ink);}
+    .grid{display:block; padding:0;}
+    .card{break-inside:avoid; box-shadow:none; margin-bottom:14px;}
+    .box{border-color:#999;}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <p class="eyebrow">Charity Week &middot; Midlands Shura</p>
+      <h1>Event Planning Checklist</h1>
+      <p>Everything from first idea to final debrief. Tick as you go &mdash; your progress saves in this browser.</p>
+    </div>
+    <div class="ring-wrap">
+      <div class="ring">
+        <svg width="148" height="148" viewBox="0 0 148 148">
+          <circle class="ring-track" cx="74" cy="74" r="62"></circle>
+          <circle class="ring-fill" id="ringFill" cx="74" cy="74" r="62"></circle>
+        </svg>
+        <div class="ring-label">
+          <span class="ring-pct" id="ringPct">0%</span>
+          <span class="ring-sub" id="ringSub">0 of 0 done</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="toolbar">
+  <span class="count-note" id="countNote"></span>
+  <button class="tool" id="printBtn">Print / Save as PDF</button>
+  <button class="tool" id="resetBtn">Reset all</button>
+</div>
+
+<main class="grid" id="grid"></main>
+
+<footer>
+  <span class="built">Note:</span> the Post-Event section was missing from the original list, so it's been built out with standard CW close-down steps. Adjust to fit your event.
+</footer>
+
+<script>
+const SECTIONS = [
+  { title:"Pre-Event", items:[
+    "Goals and objectives",
+    "Target audience",
+    {t:"Venue", n:"Seating &middot; AV equipment &middot; food (buffet / catered)"},
+    "Theme",
+    "Decor / favours",
+    "Itinerary &ndash; hosts, speakers, games",
+  ]},
+  { title:"Venue &amp; Safety", items:[
+    "University / venue approval obtained",
+    "Security / stewards allocated (if needed)",
+    "Food allergy &amp; dietary requirements collected",
+    "Emergency evacuation procedure",
+    "Safeguarding considerations",
+    "Insurance requirements",
+  ]},
+  { title:"Team &amp; People Management", items:[
+    "Event lead identified",
+    "Department leads assigned",
+    "Volunteer recruitment complete",
+    "Volunteer briefing / training completed",
+    "Team contact list created",
+    "WhatsApp communication plan",
+    "Contingency cover if key volunteers drop out",
+  ]},
+  { title:"Registration &amp; Attendance", items:[
+    "Ticketing / registration system",
+    "Attendance target set",
+    "Sign-in process",
+    "Walk-in policy",
+    "Guest list confirmed",
+    "Reminder schedule (1 week, 3 days, 24 hours)",
+  ]},
+  { title:"Speaker &amp; Guest Management", items:[
+    "Speaker confirmed in writing",
+    "Travel / accommodation arranged",
+    "Speaker brief sent",
+    "Presentation slides collected",
+    "Speaker arrival time confirmed",
+    "Thank-you gifts prepared",
+  ]},
+  { title:"Budget", items:[
+    "Track spending &amp; order potential costs by priority",
+    {t:"Contact local businesses for support", n:"Food / drink discounts, renting decor"},
+    {t:"Sponsorship packages", n:"What can you offer? Flyer handouts, brand promotion on UK Instagram"},
+    "Speak to Community Fundraisers (CFs) for contacts",
+  ]},
+  { title:"Finance", items:[
+    "Budget approved",
+    "Payment method on the day",
+    "Cash handling process",
+    "Invoice collection",
+    "Reimbursement process",
+    "Fundraising permissions (if fundraising)",
+  ]},
+  { title:"On the Day", items:[
+    "Itinerary with buffer times built in",
+    {t:"Pre-allocated roles", n:"Registration &middot; set-up (stage, snacks, tables, favours, barrier) &middot; speaker / host run-through &middot; AV &middot; timekeeper"},
+    "Time at the end to tidy up + team debrief",
+  ]},
+  { title:"Marketing", items:[
+    "Launch social media campaign (countdown to build hype)",
+    "Send invitations &amp; keep a checklist (call, message, email)",
+    "Range of promotional content (posters, reels)",
+    "Collab posts with ISocs / other pages &ndash; tag people",
+  ]},
+  { title:"Event Experience", items:[
+    "Clear purpose / outcome for attendees",
+    "Audience journey mapped",
+    "Icebreakers / networking opportunities",
+    "Interactive elements",
+    "Photography / videography plan",
+    "Accessibility considerations",
+    "Feedback forms",
+  ]},
+  { title:"Contingency Planning", items:[
+    "Backup speaker",
+    "Backup AV plan",
+    "Backup laptop",
+    "Backup microphone",
+    "Rain / weather plan (if outdoor)",
+    "Low attendance plan",
+    "High attendance overflow plan",
+  ]},
+  { title:"Post-Event", items:[
+    "Team debrief &amp; lessons learned",
+    "Thank volunteers, speakers &amp; sponsors",
+    "Collect &amp; analyse feedback forms",
+    "Financial reconciliation (count &amp; bank funds)",
+    "Submit fundraising total to Islamic Relief / CW",
+    "Social media wrap-up post (announce total, thank everyone)",
+    "Share photos / videos",
+    "Update Shura tracker with final figures",
+  ]},
+];
+
+const STORE_KEY = "cw2026-event-checklist";
+let checked = loadState();
+
+function loadState(){
+  try{ return new Set(JSON.parse(localStorage.getItem(STORE_KEY) || "[]")); }
+  catch(e){ return new Set(); }
+}
+function saveState(){
+  try{ localStorage.setItem(STORE_KEY, JSON.stringify([...checked])); }catch(e){}
+}
+
+const grid = document.getElementById("grid");
+const C = 2 * Math.PI * 62; // ring circumference
+document.getElementById("ringFill").style.strokeDasharray = C;
+
+function render(){
+  grid.innerHTML = "";
+  SECTIONS.forEach((sec, si) => {
+    const card = document.createElement("section");
+    card.className = "card";
+
+    const ul = document.createElement("ul");
+    ul.className = "items";
+
+    sec.items.forEach((raw, ii) => {
+      const id = si + "-" + ii;
+      const text = typeof raw === "string" ? raw : raw.t;
+      const note = typeof raw === "object" ? raw.n : null;
+      const isDone = checked.has(id);
+
+      const li = document.createElement("li");
+      li.className = "item";
+      const label = document.createElement("label");
+      label.className = "check" + (isDone ? " done" : "");
+      label.innerHTML =
+        '<input type="checkbox" ' + (isDone ? "checked" : "") + '>' +
+        '<span class="box"><svg viewBox="0 0 24 24" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg></span>' +
+        '<span class="txt">' + text + (note ? '<span class="note">' + note + '</span>' : '') + '</span>';
+      label.querySelector("input").addEventListener("change", e => {
+        if(e.target.checked) checked.add(id); else checked.delete(id);
+        label.classList.toggle("done", e.target.checked);
+        saveState(); updateProgress();
+      });
+      li.appendChild(label);
+      ul.appendChild(li);
+    });
+
+    card.innerHTML =
+      '<div class="card-head">' +
+        '<div class="card-title-row">' +
+          '<span class="num">' + (si+1) + '</span>' +
+          '<h2>' + sec.title + '</h2>' +
+          '<span class="badge" data-sec="' + si + '"></span>' +
+        '</div>' +
+        '<div class="bar"><div class="bar-fill" data-bar="' + si + '"></div></div>' +
+      '</div>';
+    card.appendChild(ul);
+    grid.appendChild(card);
+  });
+  updateProgress();
+}
+
+function updateProgress(){
+  let total = 0, done = 0;
+  SECTIONS.forEach((sec, si) => {
+    let st = sec.items.length, sd = 0;
+    sec.items.forEach((_, ii) => { if(checked.has(si+"-"+ii)) sd++; });
+    total += st; done += sd;
+    const pct = Math.round((sd/st)*100);
+    const bar = document.querySelector('[data-bar="'+si+'"]');
+    const badge = document.querySelector('[data-sec="'+si+'"]');
+    if(bar) bar.style.width = pct + "%";
+    if(badge) badge.textContent = sd + "/" + st;
+    const card = grid.children[si];
+    if(card) card.classList.toggle("complete", sd === st && st > 0);
+  });
+
+  const pct = total ? Math.round((done/total)*100) : 0;
+  document.getElementById("ringPct").textContent = pct + "%";
+  document.getElementById("ringSub").textContent = done + " of " + total + " done";
+  document.getElementById("countNote").textContent =
+    done === total ? "All done. Go run a great event." : (total - done) + " items still open across " + SECTIONS.length + " stages";
+
+  const fill = document.getElementById("ringFill");
+  fill.style.strokeDashoffset = C * (1 - pct/100);
+  fill.style.stroke = pct === 100 ? "#BBF7D0" : "#fff";
+}
+
+document.getElementById("resetBtn").addEventListener("click", () => {
+  if(confirm("Clear every tick and start fresh?")){
+    checked = new Set(); saveState(); render();
+  }
+});
+document.getElementById("printBtn").addEventListener("click", () => window.print());
+
+render();
+</script>
+</body>
+</html>
